@@ -1,6 +1,6 @@
 import "@/app/ui/globals.css";
 import type { Metadata } from "next";
-import { inter, lusitana } from "./ui/fonts";
+import { inter } from "./ui/fonts";
 
 export const metadata: Metadata = {
   title: "KennieDevCamp",

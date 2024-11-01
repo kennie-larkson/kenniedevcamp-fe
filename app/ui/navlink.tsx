@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  HomeIcon,
-  BookOpenIcon,
-  UserGroupIcon,
-  HandRaisedIcon,
-} from "@heroicons/react/24/outline";
-import { ForwardRefExoticComponent, RefAttributes, SVGProps } from "react";
+
 import { LinkType } from "./header";
 
 export default function NavLink({ link }: { link: LinkType }) {
