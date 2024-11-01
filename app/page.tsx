@@ -11,13 +11,12 @@ export default function Page() {
     console.log("form submitted");
   }
   return (
-    <main className="flex min-h-screen flex-col p-2 md:p-6 md:pt-0 bg-slate-200 ">
+    <main className="flex min-h-screen flex-col md:p-6 md:pt-0 bg-slate-200 ">
       <Header />
       <div className="flex flex-col mt-4 md:mt-0 md:p-6 md:pt-0 ">
         <div
           id="#home"
-          className="flex flex-col space-y-12 items-center justify-center rounded-md md:rounded-none md:rounded-t-md p-6 md:p-20 "
-          // style={{ backgroundImage: "url('/rockstar_techie.jpeg')" }}
+          className="flex flex-col space-y-12 items-start md:items-center justify-start md:justify-center rounded-md md:rounded-none md:rounded-t-md p-6 md:p-20 "
         >
           {/* Background Image */}
           <Image
@@ -31,7 +30,7 @@ export default function Page() {
           <div className="absolute inset-0 bg-black/50 rounded-md md:rounded-none md:rounded-t-md"></div>
           {/* Content container with relative positioning to appear above the overlay */}
           <div className="relative z-10 flex flex-col md:space-y-6 md:items-center md:justify-center">
-            <div className="flex flex-col items-center justify-center mt-60 md:mt-24">
+            <div className="flex flex-col items-center justify-center mt-56 md:mt-24">
               <p
                 className={`${lusitana} text-slate-100 antialiased text-3xl md:text-4xl md:leading-relaxed md:text-center`}
               >
@@ -44,7 +43,7 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center mt-6 md:mt-0">
+            <div className="flex flex-col items-center justify-center mt-2 md:mt-0">
               <p
                 className={`${lusitana} text-slate-50 antialiased text-base md:text-2xl md:leading-loose text-center `}
               >

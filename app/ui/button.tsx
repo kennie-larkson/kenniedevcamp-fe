@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Button({ type }: { type: string }) {
   return (
-    <div className="flex w-2/4 justify-center md:w-1/4 items-end">
+    <div className="flex w-1/4 justify-center md:w-1/4 items-end ">
       <Link
         href="/signin"
         className=" text-black hover:text-white md:mt-4 md:px-4 md:py-2 "
