@@ -1,3 +1,5 @@
+import { config } from "process";
+
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
