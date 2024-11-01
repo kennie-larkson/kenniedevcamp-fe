@@ -8,7 +8,6 @@ import {
   HandRaisedIcon,
 } from "@heroicons/react/24/outline";
 import { ForwardRefExoticComponent, SVGProps, RefAttributes } from "react";
-import Image from "next/image";
 
 export type LinkType = {
   linkText: string;
