@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@vercel/postgres": "^0.10.0",
     "autoprefixer": "^10.4.20",
     "next": "15.0.0-canary.56",
     "react": "19.0.0-rc.0",
-    "react-dom": "19.0.0-rc.0"
+    "react-dom": "19.0.0-rc.0",
+    "use-debounce": "^10.0.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,15 +1,12 @@
 "use client";
 
 import "@/app/ui/globals.css";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "./ui/fonts";
 import Image from "next/image";
 import Header from "./ui/header";
+import { OnboardingForm } from "./ui/onboarding-form";
 
 export default function Page() {
-  async function handleSubmission() {
-    console.log("form submitted");
-  }
   return (
     <main className="flex min-h-screen flex-col md:p-6 md:pt-0 bg-slate-200 ">
       <Header />
@@ -52,25 +49,8 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center mt-10 md:mt-0 w-full">
-              <input
-                type="email"
-                name=""
-                id=""
-                placeholder="enter your email here"
-                className="w-4/5 md:w-3/5 py-2 px-2 rounded-2xl border-2 border-gray-400 focus:border-black transition-colors duration-200"
-              />
-
-              <button
-                type="submit"
-                onClick={handleSubmission}
-                className="bg-slate-800 h-8 hover:bg-purple-500 flex items-center justify-center mt-4 md:mt-6 text-white w-4/5 md:w-3/5 md:h-12 rounded-md"
-              >
-                <span className="text-sm md:text-base font-bold">
-                  Become a camper
-                </span>
-                <ArrowRightIcon className="hidden md:block md:w-6 ml-4" />
-              </button>
+            <div className="flex flex-col items-center justify-center mt-10 md:mt-0 w-full ">
+              <OnboardingForm />
             </div>
           </div>
         </div>
