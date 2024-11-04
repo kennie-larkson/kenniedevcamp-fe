@@ -1,3 +1,5 @@
+"use client";
+
 import HomeLogo from "./logo";
 import NavLinks from "./navlinks";
 import Button from "./button";
@@ -8,6 +10,7 @@ import {
   HandRaisedIcon,
 } from "@heroicons/react/24/outline";
 import { ForwardRefExoticComponent, SVGProps, RefAttributes } from "react";
+import { useOnboardErrorContext } from "../error/errorcontext";
 
 export type LinkType = {
   linkText: string;
@@ -44,15 +47,27 @@ export const links: LinkType[] = [
 ];
 
 export default function Header() {
+  const { setError, setSuccess, error, success } = useOnboardErrorContext();
   return (
-    <div
-      className={`flex flex-col border-b-4 space-y-2 md:space-y-0 md:flex-row mt-0 mb-6 h-10 border-0 sticky top-0 z-50 rounded-none items-start md:items-end justify-start md:justify-between md:px-3 md:h-28 md:text-xl bg-slate-200 `}
-    >
-      <HomeLogo />
-      <div className="flex w-full justify-center py-3 md:py-0 md:justify-between space-x-0 md:space-x-3  bg-gradient-to-r from-cyan-600 via-cyan-300 to-indigo-400  ">
-        <NavLinks links={links} />
-        <Button type="SIGN IN" />
+    <div className="flex flex-col">
+      <div
+        className={`flex flex-col border-b-4 space-y-2 md:space-y-0 md:flex-row mt-0 mb-6 h-10 border-0 sticky top-0 z-50 rounded-none items-start md:items-end justify-start md:justify-between md:px-3 md:h-28 md:text-xl bg-slate-200 `}
+      >
+        <HomeLogo />
+        <div className="flex w-full justify-center py-3 md:py-0 md:justify-between space-x-0 md:space-x-3  bg-gradient-to-r from-cyan-600 via-cyan-300 to-indigo-400  ">
+          <NavLinks links={links} />
+          <Button type="SIGN IN" />
+        </div>
       </div>
+
+      {/* {error && (
+        <div className="bg-red-500 text-white p-4 rounded-md mb-4">{error}</div>
+      )}
+      {success && (
+        <div className="bg-green-500 text-white p-4 rounded-md mb-4">
+          {success}
+        </div>
+      )} */}
     </div>
   );
 }

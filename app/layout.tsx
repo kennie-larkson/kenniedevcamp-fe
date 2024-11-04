@@ -1,6 +1,7 @@
 import "@/app/ui/globals.css";
 import type { Metadata } from "next";
 import { inter } from "./ui/fonts";
+import { OnboardErrorContextProvider } from "./error/errorcontext";
 
 export const metadata: Metadata = {
   title: "KennieDevCamp",
@@ -20,8 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
-    </html>
+    <OnboardErrorContextProvider>
+      <html lang="en">
+        <body className={`${inter.className} antialiased`}>{children}</body>
+      </html>
+    </OnboardErrorContextProvider>
   );
 }

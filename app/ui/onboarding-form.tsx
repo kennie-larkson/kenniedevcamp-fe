@@ -2,40 +2,84 @@
 
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-import { createCamper } from "../lib/actions";
-import { useState } from "react";
+import { OnboardingFormAction } from "../lib/onboardFormAction";
+import { useActionState, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { useOnboardErrorContext } from "../error/errorcontext";
 
 export function OnboardingForm() {
+  const { setError, setSuccess } = useOnboardErrorContext();
+  const [state, formAction] = useActionState(OnboardingFormAction, {
+    success: false,
+    error: "",
+  });
   const [email, setEmail] = useState("");
-  const [formError, setFormError] = useState("");
+  //const [formError, setFormError] = useState("");
+  // Check for errors in the state and set them in the context
+  useEffect(() => {
+    if (state.error) {
+      setError(state.error); // Set the error from the state
+    }
+    // Clear error after 20 seconds or when success is true
+    const timeoutId = setTimeout(() => {
+      setError("");
+    }, 20000);
+
+    // Clear the timeout if success becomes true
+    if (state.success) {
+      setError("");
+      clearTimeout(timeoutId);
+    }
+
+    if (state.success) {
+      setSuccess(
+        "Congratulations!!! You are now a KennieDevCamp camper. Kindly check your email for the verification code."
+      );
+      setInterval(() => {
+        setSuccess("");
+      }, 30000);
+    }
+
+    // Cleanup function to clear the timeout if the component unmounts
+    return () => clearTimeout(timeoutId);
+  }, [state.error, state.success, setError, setSuccess]); // Dependency array includes setError to avoid linting issues
 
   const handleEmail = useDebouncedCallback((value: string) => {
     setEmail(value);
-  }, 3000);
+  }, 1000);
+
+  /* setInterval(() => {
+    setError("");
+    setSuccess("");
+  }, 20000); */
 
   function handleFormSubmission(event: React.MouseEvent<HTMLButtonElement>) {
-    if (email.length === 0 || email === "") {
-      event.preventDefault();
-      setFormError("Kindly enter a valid email");
-      setInterval(() => setFormError(""), 10000);
+    try {
+      if (email.length === 0 || email === "") {
+        event.preventDefault();
+        setError("Kindly enter a valid email");
+        setTimeout(() => setError(""), 10000);
+      }
+
+      return;
+    } catch (error) {
+      setError("An unexpected error occured.");
     }
-    return;
   }
   return (
     <form
-      action={createCamper}
+      action={formAction}
       className="flex flex-col w-4/5 justify-center items-center"
     >
-      <div
+      {/* {state.error && <p className="text-red-500 text-sm">{state.error}</p>} */}
+      {/*  <div
         className={`${
           formError.length > 1
         }? flex w-4/5 bg-slate-100 rounded-lg p-2:hidden `}
       >
         <p className="text-sm text-center text-red-500">{formError}</p>
-      </div>
+      </div> */}
       <input
-        //value={email}
         type="email"
         name="email"
         id="email"
