@@ -6,13 +6,44 @@ import Image from "next/image";
 import Header from "./ui/header";
 import { OnboardingForm } from "./ui/onboarding-form";
 import { useOnboardErrorContext } from "./error/errorcontext";
+import { useEffect, useState } from "react";
+import AlertModal from "./ui/alert-modal";
 
 export default function Page() {
   const { error, success } = useOnboardErrorContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState<"error" | "success">("error");
+
+  // Effect to open the modal when there's an error or success
+  useEffect(() => {
+    if (error) {
+      setModalMessage(error);
+      setModalType("error");
+      setIsModalOpen(true);
+      setTimeout(() => setIsModalOpen(false), 10000);
+    } else if (success) {
+      setModalMessage(success);
+      setModalType("success");
+      setIsModalOpen(true);
+      setTimeout(() => setIsModalOpen(false), 10000);
+    }
+  }, [error, success]);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <main className="flex min-h-screen flex-col md:p-6 md:pt-0 bg-slate-200 ">
       <Header />
-
+      {isModalOpen && (
+        <AlertModal
+          message={modalMessage}
+          type={modalType}
+          onClose={handleCloseModal}
+        />
+      )}
       <div className="flex flex-col mt-4 md:mt-0 md:p-6 md:pt-0 ">
         <div
           id="#home"
@@ -31,7 +62,7 @@ export default function Page() {
 
           {/* Content container with relative positioning to appear above the overlay */}
           <div className="relative z-10 flex flex-col md:space-y-6 md:items-center md:justify-center">
-            {error && (
+            {/*   {error && (
               <div className="bg-red-500 text-white p-4 rounded-md mb-4">
                 {error}
               </div>
@@ -40,7 +71,7 @@ export default function Page() {
               <div className="bg-green-500 text-white p-4 rounded-md mb-4">
                 {success}
               </div>
-            )}
+            )} */}
             <div className="flex flex-col items-center justify-center mt-56 md:mt-24">
               <p
                 className={`${lusitana} text-slate-100 antialiased text-3xl md:text-4xl md:leading-relaxed md:text-center`}
