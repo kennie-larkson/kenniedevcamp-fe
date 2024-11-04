@@ -48,11 +48,6 @@ export function OnboardingForm() {
     setEmail(value);
   }, 1000);
 
-  /* setInterval(() => {
-    setError("");
-    setSuccess("");
-  }, 20000); */
-
   function handleFormSubmission(event: React.MouseEvent<HTMLButtonElement>) {
     try {
       if (email.length === 0 || email === "") {
@@ -71,14 +66,6 @@ export function OnboardingForm() {
       action={formAction}
       className="flex flex-col w-4/5 justify-center items-center"
     >
-      {/* {state.error && <p className="text-red-500 text-sm">{state.error}</p>} */}
-      {/*  <div
-        className={`${
-          formError.length > 1
-        }? flex w-4/5 bg-slate-100 rounded-lg p-2:hidden `}
-      >
-        <p className="text-sm text-center text-red-500">{formError}</p>
-      </div> */}
       <input
         type="email"
         name="email"

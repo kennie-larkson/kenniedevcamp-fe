@@ -25,15 +25,13 @@ export async function OnboardingFormAction(
   prevState: FormState,
   formData: FormData
 ) {
-  const { email } = CreateCamper.parse({
-    email: formData.get("email"),
-  });
-
-  console.log("FornData: ", email);
-
-  const camperId = "kdc_001";
-
   try {
+    const { email } = CreateCamper.parse({
+      email: formData.get("email"),
+    });
+
+    const camperId = "kdc_001";
+
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     await client.sql`
     CREATE TABLE IF NOT EXISTS kdcampers (
@@ -47,13 +45,16 @@ export async function OnboardingFormAction(
 
     console.log("Onboard Query Response: ", queryResponse.rowCount);
 
-    console.log(queryResponse.rows[0]);
-
     return { success: true };
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      // Handle Zod validation errors
+
+      const errorMessages = error.errors.map((err) => err.message).join(", ");
+      return { success: false, error: errorMessages };
+    }
     const dbError = error as DatabaseError; // Type assertion
     if (dbError.code === "23505") {
-      console.log("Database Error: ", dbError.code);
       return { success: false, error: "Kindly choose a different email." };
     }
 
