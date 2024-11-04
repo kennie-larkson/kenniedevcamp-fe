@@ -14,9 +14,9 @@ type FormState = {
   error?: string;
 };
 
-type ErrorType = {
-  code: string;
-};
+interface DatabaseError extends Error {
+  code?: string; // Optional, as not all errors may have a code
+}
 
 const client = await db.connect();
 
@@ -50,9 +50,10 @@ export async function OnboardingFormAction(
     console.log(queryResponse.rows[0]);
 
     return { success: true };
-  } catch (error: any) {
-    if (error.code === "23505") {
-      console.log("Database Error: ", error.code);
+  } catch (error) {
+    const dbError = error as DatabaseError; // Type assertion
+    if (dbError.code === "23505") {
+      console.log("Database Error: ", dbError.code);
       return { success: false, error: "Kindly choose a different email." };
     }
 
