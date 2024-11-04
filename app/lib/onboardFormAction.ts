@@ -1,13 +1,10 @@
 "use server";
 
 import { db } from "@vercel/postgres";
-import { data } from "autoprefixer";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const formSchema = z.object({
   id: z.string(),
-  //camperId: z.string(),
   email: z.string().email({ message: "Please, enter a valid email." }),
   date: z.string().date(),
 });
@@ -15,6 +12,10 @@ const formSchema = z.object({
 type FormState = {
   success: boolean;
   error?: string;
+};
+
+type ErrorType = {
+  code: string;
 };
 
 const client = await db.connect();
@@ -25,13 +26,11 @@ export async function OnboardingFormAction(
   formData: FormData
 ) {
   const { email } = CreateCamper.parse({
-    //camperId: formData.get("camperId"),
     email: formData.get("email"),
   });
 
   console.log("FornData: ", email);
 
-  //const date = new Date().toISOString().split("T")[0];
   const camperId = "kdc_001";
 
   try {
@@ -47,10 +46,7 @@ export async function OnboardingFormAction(
   INSERT INTO kdcampers ( email, camper_id) VALUES ( ${email}, ${camperId}) RETURNING *`;
 
     console.log("Onboard Query Response: ", queryResponse.rowCount);
-    /* if (queryResponse.rowCount) {
-      return redirect("/dashboard");
-    } */
-    //return queryResponse.rows[0];
+
     console.log(queryResponse.rows[0]);
 
     return { success: true };
@@ -64,8 +60,5 @@ export async function OnboardingFormAction(
       success: false,
       error: "Oops!!! Something went wrong. Kindly try again.",
     };
-    throw new Error("Failed to record camper");
-
-    //return redirect("/error");
   }
 }
