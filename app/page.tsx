@@ -8,6 +8,9 @@ import { OnboardingForm } from "./ui/onboarding-form";
 import { useOnboardErrorContext } from "./error/errorcontext";
 import { useEffect, useState } from "react";
 import AlertModal from "./ui/alert-modal";
+import Link from "next/link";
+import { courses } from "./courses/courses";
+import { resources } from "./resources/resources";
 
 export default function Page() {
   const { error, success } = useOnboardErrorContext();
@@ -62,16 +65,6 @@ export default function Page() {
 
           {/* Content container with relative positioning to appear above the overlay */}
           <div className="relative z-10 flex flex-col md:space-y-6 md:items-center md:justify-center">
-            {/*   {error && (
-              <div className="bg-red-500 text-white p-4 rounded-md mb-4">
-                {error}
-              </div>
-            )}
-            {success && (
-              <div className="bg-green-500 text-white p-4 rounded-md mb-4">
-                {success}
-              </div>
-            )} */}
             <div className="flex flex-col items-center justify-center mt-56 md:mt-24">
               <p
                 className={`${lusitana} text-slate-100 antialiased text-3xl md:text-4xl md:leading-relaxed md:text-center`}
@@ -100,9 +93,40 @@ export default function Page() {
           </div>
         </div>
 
-        {/* <div id="#articles" className={`w-full ${lusitana} antialiased`}>
-          <ArticlesComponent />
-        </div> */}
+        <section id="courses" className="p-6 mt-12 ">
+          <h2 className="text-2xl font-bold mt-12 ">Available Courses</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {courses.map((course) => (
+              <div key={course.id} className="border rounded-lg p-4">
+                <h3 className="font-semibold">{course.title}</h3>
+                <p>{course.description}</p>
+                <Link href={`/courses/${course.id}`} className="text-blue-500">
+                  Enroll Now
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="resources" className="p-6">
+          <h2 className="text-2xl font-bold">Learning Resources</h2>
+          <input
+            type="text"
+            placeholder="Search resources..."
+            className="border p-2 rounded w-full md:w-3/4"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {resources.map((resource) => (
+              <div key={resource.id} className="border rounded-lg p-4">
+                <h3 className="font-semibold">{resource.title}</h3>
+                <p>{resource.description}</p>
+                <Link href={resource.link} className="text-blue-500">
+                  View Resource
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
