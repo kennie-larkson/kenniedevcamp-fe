@@ -49,20 +49,22 @@ export default function Page() {
       )}
       <div className="flex flex-col mt-4 md:mt-0 md:p-6 md:pt-0 ">
         <div
-          id="#home"
-          className="flex flex-col space-y-12 items-start md:items-center justify-start md:justify-center rounded-md md:rounded-none md:rounded-t-md p-6 md:p-20 "
+          id="home"
+          className="relative flex flex-col space-y-12 items-start md:items-center justify-start md:justify-center rounded-md md:rounded-none md:rounded-t-md p-6 md:p-20 "
         >
           {/* Background Image */}
-          <Image
-            src="/rockstar_techie.jpeg"
-            alt="Background"
-            fill
-            priority
-            className="object-cover rounded-md md:rounded-none md:rounded-t-md"
-            quality={100}
-          />
-          <div className="absolute inset-0 bg-black/50 rounded-md md:rounded-none md:rounded-t-md"></div>
-
+          <div className="absolut inset-0">
+            <Image
+              src="/rockstar_techie.jpeg"
+              alt="Background"
+              layout="fill"
+              objectFit="cover"
+              priority
+              className="object-cover rounded-md md:rounded-none md:rounded-t-md"
+              quality={100}
+            />
+            <div className="absolute inset-0 bg-black/50 rounded-md md:rounded-none md:rounded-t-md"></div>
+          </div>
           {/* Content container with relative positioning to appear above the overlay */}
           <div className="relative z-10 flex flex-col md:space-y-6 md:items-center md:justify-center">
             <div className="flex flex-col items-center justify-center mt-56 md:mt-24">
@@ -95,7 +97,7 @@ export default function Page() {
         <div className="flex mt-6">
           <hr className="border-t-4 rounded-md border-cyan-400 font-extrabold w-full " />
         </div>
-        <section id="courses" className="p-6 mt-12 ">
+        <section id="courses" className="p-6 ">
           <h2 className="text-2xl font-bold mt-12 ">Available Courses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {courses.map((course) => (
