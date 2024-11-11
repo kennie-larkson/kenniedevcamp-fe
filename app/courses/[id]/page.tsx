@@ -18,20 +18,20 @@ const CoursePage = () => {
   return (
     <div className="flex flex-col ">
       <CourseNavbar />
-      <div className="flex flex-col  p-6 w-full">
+      <div className="flex flex-col  p-6 w-full min-h-screen bg-slate-300">
         <div className="flex justify-center items-center">
           <div className="flex text-center">
             <h1 className="text-3xl">{course.title}</h1>
           </div>
         </div>
 
-        <div className="flex flex-col mt-6 p-3 rounded-md bg-slate-400">
-          <div className="text-white text-lg space-y-2">
+        <div className="flex flex-col mt-6 p-3 border rounded-md ">
+          <div className=" text-white text-lg space-y-4 p-4 leading-relaxed">
             <p>Description: {course.description}</p>
             <p>Duration: {course.duration}</p>
             <p>Level: {course.level}</p>
             <p>Prerequisites: {course.prerequisites}</p>
-            <p>Instructor: {course.instructor}</p>
+            {/* <p>Instructor: {course.instructor}</p> */}
             {/* Add more course details as needed */}
           </div>
         </div>

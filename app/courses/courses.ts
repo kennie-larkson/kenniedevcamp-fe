@@ -7,7 +7,7 @@ export const courses = [
     duration: "4 weeks",
     level: "Beginner",
     prerequisites: "None",
-    instructor: "Jane Doe",
+    //instructor: "Jane Doe",
   },
   {
     id: "2",
@@ -17,7 +17,7 @@ export const courses = [
     duration: "4 weeks",
     level: "Beginner",
     prerequisites: "Introduction to HTML",
-    instructor: "John Smith",
+    //instructor: "John Smith",
   },
   {
     id: "3",
@@ -27,7 +27,7 @@ export const courses = [
     duration: "6 weeks",
     level: "Beginner",
     prerequisites: "CSS Fundamentals",
-    instructor: "Alice Johnson",
+    //instructor: "Alice Johnson",
   },
   {
     id: "4",
@@ -37,7 +37,7 @@ export const courses = [
     duration: "5 weeks",
     level: "Intermediate",
     prerequisites: "HTML & CSS Fundamentals",
-    instructor: "Michael Brown",
+    //instructor: "Michael Brown",
   },
   {
     id: "5",
@@ -47,7 +47,7 @@ export const courses = [
     duration: "8 weeks",
     level: "Intermediate",
     prerequisites: "JavaScript Basics",
-    instructor: "Emily Davis",
+    //instructor: "Emily Davis",
   },
   {
     id: "6",
@@ -57,7 +57,7 @@ export const courses = [
     duration: "8 weeks",
     level: "Intermediate",
     prerequisites: "JavaScript Basics",
-    instructor: "David Wilson",
+    //instructor: "David Wilson",
   },
   {
     id: "7",
@@ -68,7 +68,7 @@ export const courses = [
     level: "Advanced",
     prerequisites:
       "Frontend Development with React, Backend Development with Node.js",
-    instructor: "Sarah Miller",
+    //instructor: "Sarah Miller",
   },
   {
     id: "8",
@@ -78,7 +78,7 @@ export const courses = [
     duration: "2 weeks",
     level: "Beginner",
     prerequisites: "None",
-    instructor: "Chris Lee",
+    //instructor: "Chris Lee",
   },
   {
     id: "9",
@@ -88,7 +88,7 @@ export const courses = [
     duration: "3 weeks",
     level: "Intermediate",
     prerequisites: "HTML & CSS Fundamentals",
-    instructor: "Laura Martinez",
+    //instructor: "Laura Martinez",
   },
   {
     id: "10",
@@ -98,6 +98,6 @@ export const courses = [
     duration: "4 weeks",
     level: "Intermediate",
     prerequisites: "JavaScript Basics",
-    instructor: "James Anderson",
+    //instructor: "James Anderson",
   },
 ];
