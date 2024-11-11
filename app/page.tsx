@@ -92,7 +92,9 @@ export default function Page() {
             </div>
           </div>
         </div>
-
+        <div className="flex mt-6">
+          <hr className="border-t-4 rounded-md border-cyan-400 font-extrabold w-full " />
+        </div>
         <section id="courses" className="p-6 mt-12 ">
           <h2 className="text-2xl font-bold mt-12 ">Available Courses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -107,7 +109,9 @@ export default function Page() {
             ))}
           </div>
         </section>
-
+        <div className="flex mt-6">
+          <hr className="border-t-4 rounded-md border-indigo-400 font-extrabold w-full " />
+        </div>
         <section id="resources" className="p-6">
           <h2 className="text-2xl font-bold">Learning Resources</h2>
           <input
