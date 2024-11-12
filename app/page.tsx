@@ -53,12 +53,13 @@ export default function Page() {
           className="relative flex flex-col space-y-12 items-start md:items-center justify-start md:justify-center rounded-md md:rounded-none md:rounded-t-md p-6 md:p-20 "
         >
           {/* Background Image */}
-          <div className="absolut inset-0">
+          <div className="absolute inset-0">
             <Image
               src="/rockstar_techie.jpeg"
               alt="Background"
-              layout="fill"
-              objectFit="cover"
+              fill
+              //layout="fill"
+              //objectFit="cover"
               priority
               className="object-cover rounded-md md:rounded-none md:rounded-t-md"
               quality={100}

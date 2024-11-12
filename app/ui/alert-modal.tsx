@@ -7,6 +7,7 @@ interface AlertModalProps {
 }
 
 const AlertModal: React.FC<AlertModalProps> = ({ message, type, onClose }) => {
+  const bgColor = type === "error" ? "bg-red-500" : "bg-green-500";
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
@@ -14,9 +15,10 @@ const AlertModal: React.FC<AlertModalProps> = ({ message, type, onClose }) => {
         onClick={onClose}
       ></div>
       <div
-        className={`bg-${
+        /* className={`bg-${
           type === "error" ? "red-500" : "green-500"
-        } text-white p-6 rounded-md shadow-lg z-10`}
+        } text-white p-6 rounded-md shadow-lg z-10`} */
+        className={`${bgColor} text-white p-6 rounded-md shadow-lg z-10`}
       >
         <p>{message}</p>
         <button
