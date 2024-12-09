@@ -8,15 +8,6 @@ import { CourseSkeleton } from "@/app/dashboard/ui/skeletons";
 import { verifyAuth } from "@/app/authentication/auth";
 import { QueryResultRow } from "@vercel/postgres";
 
-interface ICourse {
-  course_id: string;
-  title: string;
-  description: string;
-  duration: string;
-  level: string;
-  prerequisites: string;
-}
-
 const CourseContent = ({
   course,
   handleEnroll,
