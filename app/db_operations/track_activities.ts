@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@vercel/postgres";
+import { db, QueryResultRow } from "@vercel/postgres";
 
 export type ActivityType =
   | "course_enrollment"
@@ -11,7 +11,7 @@ interface ActivityData {
   camperId: string;
   type: ActivityType;
   description: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, QueryResultRow>;
 }
 
 export async function trackActivity(data: ActivityData) {

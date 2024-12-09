@@ -11,7 +11,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { storage } from "../lib/localStorage";
 
 export default function SignInPage() {
-  const { setError, setSuccess, error, success } = useOnboardContext();
+  const { setError, error } = useOnboardContext();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

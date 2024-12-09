@@ -2,16 +2,26 @@
 
 import { useState, useEffect } from "react";
 import { getCourseById } from "../getcourse";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import CourseNavbar from "../../ui/courses/navbar";
 import { CourseSkeleton } from "@/app/dashboard/ui/skeletons";
 import { verifyAuth } from "@/app/authentication/auth";
+import { QueryResultRow } from "@vercel/postgres";
+
+interface ICourse {
+  course_id: string;
+  title: string;
+  description: string;
+  duration: string;
+  level: string;
+  prerequisites: string;
+}
 
 const CourseContent = ({
   course,
   handleEnroll,
 }: {
-  course: any;
+  course: QueryResultRow;
   handleEnroll: () => void;
 }) => {
   return (
@@ -44,7 +54,7 @@ const CourseContent = ({
 const CoursePage = () => {
   const pathName = usePathname();
   const router = useRouter();
-  const [course, setCourse] = useState<any>(null);
+  const [course, setCourse] = useState<QueryResultRow>();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

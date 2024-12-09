@@ -45,10 +45,6 @@ export async function getUserActivityRecords(camper_id: string) {
   }
 }
 
-interface DashboardData {
-  camper_id: string;
-}
-
 export async function getUserDashboardRecords(data: string) {
   try {
     //const { camper_id } = data;
