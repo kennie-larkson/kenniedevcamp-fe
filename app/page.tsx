@@ -5,7 +5,7 @@ import { lusitana } from "./ui/fonts";
 import Image from "next/image";
 import Header from "./ui/header";
 import { OnboardingForm } from "./ui/onboarding-form";
-import { useOnboardErrorContext } from "./error/errorcontext";
+import { useOnboardContext } from "./error/errorcontext";
 import { useEffect, useState } from "react";
 import AlertModal from "./ui/alert-modal";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import { courses } from "./courses/courses";
 import { resources } from "./resources/resources";
 
 export default function Page() {
-  const { error, success } = useOnboardErrorContext();
+  const { error, success } = useOnboardContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState<"error" | "success">("error");
@@ -102,11 +102,14 @@ export default function Page() {
           <h2 className="text-2xl font-bold mt-12 ">Available Courses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {courses.map((course) => (
-              <div key={course.id} className="border rounded-lg p-4">
+              <div key={course.course_id} className="border rounded-lg p-4">
                 <h3 className="font-semibold">{course.title}</h3>
                 <p>{course.description}</p>
-                <Link href={`/courses/${course.id}`} className="text-blue-500">
-                  Enroll Now
+                <Link
+                  href={`/courses/${course.course_id}`}
+                  className="text-blue-500"
+                >
+                  View details
                 </Link>
               </div>
             ))}
@@ -138,5 +141,3 @@ export default function Page() {
     </main>
   );
 }
-
-//    bg-gradient-to-r from-cyan-600 via-cyan-300 to-indigo-400

@@ -1,71 +1,53 @@
 "use client";
 
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-
-import { OnboardingFormAction } from "../lib/onboardFormAction";
-import { useActionState, useEffect, useState } from "react";
+import { signupCamper } from "../authentication/camper-signup";
+import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { useOnboardErrorContext } from "../error/errorcontext";
+import { useOnboardContext } from "../error/errorcontext";
+import { useRouter } from "next/navigation";
+import { storage } from "../lib/localStorage";
 
 export function OnboardingForm() {
-  const { setError, setSuccess } = useOnboardErrorContext();
-  const [state, formAction] = useActionState(OnboardingFormAction, {
-    success: false,
-    error: "",
-  });
+  const { setError, setSuccess, setToken } = useOnboardContext();
+  const router = useRouter();
   const [email, setEmail] = useState("");
-  //const [formError, setFormError] = useState("");
-  // Check for errors in the state and set them in the context
-  useEffect(() => {
-    if (state.error) {
-      setError(state.error); // Set the error from the state
-    }
-    // Clear error after 20 seconds or when success is true
-    const timeoutId = setTimeout(() => {
-      setError("");
-    }, 20000);
-
-    // Clear the timeout if success becomes true
-    if (state.success) {
-      setError("");
-      clearTimeout(timeoutId);
-    }
-
-    if (state.success) {
-      setSuccess(
-        "Congratulations!!! You are now a KennieDevCamp camper. Kindly check your email for the verification code."
-      );
-      setInterval(() => {
-        setSuccess("");
-      }, 30000);
-    }
-
-    // Cleanup function to clear the timeout if the component unmounts
-    return () => clearTimeout(timeoutId);
-  }, [state.error, state.success, setError, setSuccess]); // Dependency array includes setError to avoid linting issues
 
   const handleEmail = useDebouncedCallback((value: string) => {
     setEmail(value);
   }, 1000);
-
-  function handleFormSubmission(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleFormSubmission(
+    event: React.MouseEvent<HTMLButtonElement>
+  ) {
+    event.preventDefault();
     try {
-      if (email.length === 0 || email === "") {
-        event.preventDefault();
+      if (!email || email.length === 0 || email === "") {
         setError("Kindly enter a valid email");
         setTimeout(() => setError(""), 10000);
+        return;
       }
 
-      return;
+      const formData = new FormData();
+      formData.append("email", email);
+      const response = await signupCamper({ success: false }, formData);
+
+      if (response.error) {
+        setError(response.error);
+        return;
+      }
+
+      if (response.success && response.access_token) {
+        setSuccess("Welcome to KennieDevCamp!");
+        setToken(response.access_token);
+        storage.setCamperId(response.camper_id);
+        router.push("/dashboard");
+      }
     } catch (error) {
       setError("An unexpected error occured.");
     }
   }
   return (
-    <form
-      action={formAction}
-      className="flex flex-col w-4/5 justify-center items-center"
-    >
+    <form className="flex flex-col w-4/5 justify-center items-center">
       <input
         type="email"
         name="email"

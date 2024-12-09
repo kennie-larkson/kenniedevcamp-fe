@@ -2,32 +2,35 @@
 
 import { createContext, useContext, useState } from "react";
 
-interface ErrorContextType {
-  error: string | null;
-  success: string | null;
-  setError: (error: string | null) => void;
+interface OnboardContextType {
+  error: string;
+  setError: (error: string) => void;
+  success: string;
   setSuccess: (success: string) => void;
+  access_token: string | undefined;
+  setToken: (token: string) => void;
 }
-const OnboardErrorContext = createContext<ErrorContextType | undefined>(
-  undefined
-);
+const OnboardContext = createContext<OnboardContextType | undefined>(undefined);
 
-export const OnboardErrorContextProvider: React.FC<{
+export const OnboardContextProvider = ({
+  children,
+}: {
   children: React.ReactNode;
-}> = ({ children }) => {
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+}) => {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [access_token, setToken] = useState<string | undefined>(undefined);
   return (
-    <OnboardErrorContext.Provider
-      value={{ error, success, setError, setSuccess }}
+    <OnboardContext.Provider
+      value={{ error, success, access_token, setError, setSuccess, setToken }}
     >
       {children}
-    </OnboardErrorContext.Provider>
+    </OnboardContext.Provider>
   );
 };
 
-export const useOnboardErrorContext = () => {
-  const context = useContext(OnboardErrorContext);
+export const useOnboardContext = () => {
+  const context = useContext(OnboardContext);
   if (!context) {
     throw new Error(
       "useOnboardErrorContext must be within an useOnboardErrorContextProvider"
